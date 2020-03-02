@@ -1,0 +1,6 @@
+[submodule "minilibx"]
+	path = minilibx
+	url = https://github.com/sxhondo/minilibx.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/sxhondo/libft.git
