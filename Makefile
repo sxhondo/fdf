@@ -15,11 +15,12 @@ NAME = fdf
 CMAKE_DIR = ./cmake-build/
 
 all: $(NAME)
+	
+$(NAME): $(CMAKE_DIR) $(CMAKE_DIR)Makefile
+		$(MAKE) -C $(CMAKE_DIR) $(NAME)
 
-$(NAME): cmake
-
-cmake: $(CMAKE_DIR) $(CMAKE_DIR)Makefile
-		$(MAKE) -C $(CMAKE_DIR)
+debug: $(CMAKE_DIR) $(CMAKE_DIR)Makefile
+		$(MAKE) -C $(CMAKE_DIR) debug
 
 $(CMAKE_DIR):
 	mkdir -p $(CMAKE_DIR)
@@ -32,6 +33,9 @@ clean:
 	rm -rf $(CMAKE_DIR)
 
 fclean: clean
+	rm -rf debug
 	rm -rf $(NAME)
 
 re: fclean all
+
+.PHONY: fdf build debug re fclean clean all

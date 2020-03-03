@@ -1,0 +1,8 @@
+/Users/sxhondo/fdf/cmake-build/CMakeFiles/rebuild_cache.dir
+/Users/sxhondo/fdf/cmake-build/CMakeFiles/edit_cache.dir
+/Users/sxhondo/fdf/cmake-build/CMakeFiles/debug.dir
+/Users/sxhondo/fdf/cmake-build/CMakeFiles/libmlx.dir
+/Users/sxhondo/fdf/cmake-build/CMakeFiles/fdf.dir
+/Users/sxhondo/fdf/cmake-build/libft/CMakeFiles/rebuild_cache.dir
+/Users/sxhondo/fdf/cmake-build/libft/CMakeFiles/edit_cache.dir
+/Users/sxhondo/fdf/cmake-build/libft/CMakeFiles/libft.dir
