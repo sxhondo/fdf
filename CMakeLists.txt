@@ -30,9 +30,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/)
 
 set(SOURCES
 	${SRC_DIR}fdf.c
-	${SRC_DIR}error.c
+	${SRC_DIR}utilities.c
 	${SRC_DIR}init.c
 	${SRC_DIR}read_file.c
+	${SRC_DIR}drawing.c
+	${SRC_DIR}draw_line.c
 )
 
 add_executable(${DST} 
@@ -67,11 +69,13 @@ target_include_directories(debug PUBLIC ${INC_DIR})
 target_include_directories(debug PUBLIC ${LIB_DIR}incs/)
 target_link_directories(debug PUBLIC ${LIB_DIR})
 
+add_dependencies(${DST} libmlx libft)
+
 target_link_libraries(debug
 	"mlx"
 	"libft"
-	# "-framework OpenGL"
-	# "-framework AppKit"
+	"-framework OpenGL"
+	"-framework AppKit"
 )
 
 set_target_properties(debug PROPERTIES

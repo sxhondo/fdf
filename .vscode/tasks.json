@@ -13,7 +13,11 @@
 			"label": "make debug",
 			"type": "shell",
 			"command": "make debug",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }
