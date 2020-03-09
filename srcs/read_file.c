@@ -29,7 +29,7 @@ static char **open_file(char *path)
 	return (split);
 }
 
-static void 		parse_line(t_vec **vec, char *line, int *map_width)
+static void 		parse_line(t_vec **vec, char *line, size_t *map_width)
 {
 	size_t 			i;
 	int32_t			val;

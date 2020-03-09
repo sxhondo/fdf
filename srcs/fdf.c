@@ -16,7 +16,7 @@ int 		key_press(int keycode, void *param)
 {
 	(void )param;
 	ft_printf("[%d]\n", keycode);
-	if (keycode == 7)
+	if (keycode == 7 || keycode == 53)
 		exit(0);
 	return (0);
 }

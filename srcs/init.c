@@ -19,7 +19,6 @@ t_view			*init_view(t_map *map)
 	if (!(v = ft_memalloc(sizeof(t_view))))
 		display_error("ERR_MEM");
 	v->zoom = (WIDTH / map->width / 2);
-
 	ft_printf("zoom: %d\n", v->zoom);
 	return (v);
 }
