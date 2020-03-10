@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sxhondo <w13cho@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/02 20:36:14 by sxhondo           #+#    #+#             */
-/*   Updated: 2020/03/02 20:36:15 by sxhondo          ###   ########.fr       */
+/*   Created: 2020/03/10 19:13:31 by sxhondo           #+#    #+#             */
+/*   Updated: 2020/03/10 19:13:32 by sxhondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ t_view			*init_view(t_map *map)
 	if (!(v = ft_memalloc(sizeof(t_view))))
 		display_error("ERR_MEM");
 	v->zoom = (WIDTH / map->width / 2);
-	ft_printf("zoom: %d\n", v->zoom);
+	v->x_r = 10;
+	// v->y_r = 1;
+	// v->z_r = 1;
 	return (v);
 }
 

@@ -10,14 +10,20 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "make debug",
+			"label": "make debug && run",
 			"type": "shell",
-			"command": "make debug",
+			"command": "make debug && ./debug maps/42.fdf",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"label": "make debug",
+			"type": "shell",
+			"command": "make debug",
+			"problemMatcher": []
 		}
 	]
 }

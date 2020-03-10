@@ -35,6 +35,8 @@ set(SOURCES
 	${SRC_DIR}read_file.c
 	${SRC_DIR}drawing.c
 	${SRC_DIR}draw_line.c
+	${SRC_DIR}key_handler.c
+	${SRC_DIR}rotation_matrix.c
 )
 
 add_executable(${DST} 

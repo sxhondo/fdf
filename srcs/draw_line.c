@@ -6,7 +6,7 @@
 /*   By: sxhondo <w13cho@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 18:38:07 by sxhondo           #+#    #+#             */
-/*   Updated: 2020/03/04 18:38:08 by sxhondo          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:14:58 by sxhondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void			put_pixel(t_mlx *mlx, t_point p, unsigned color)
 {
-	int			i;
+	size_t		i;
 	
+	if (p.x >= WIDTH || p.y >= HEIGHT || p.y < 0)
+		return ;
 	i = (p.x * mlx->bits_per_pixel / 8) + (p.y * mlx->size_line);
 	if (mlx->endian == 0)
 	{
