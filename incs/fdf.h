@@ -9,8 +9,8 @@
 # define WIDTH		800
 # define HEIGHT		600
 
-# define X_ORIGIN 	WIDTH / 5
-# define Y_ORIGIN 	HEIGHT - 100
+# define X_ORIGIN 	(WIDTH / 2)
+# define Y_ORIGIN 	(HEIGHT / 2)
 
 # define ERR_MEM	"allocation failures"
 # define ERR_READ	"error while opening file"
@@ -30,16 +30,14 @@ typedef struct 	s_point
 	size_t 		z;
 }				t_point;
 
-typedef struct	s_view
+typedef struct		s_view
 {
-	float 		x_rot[3][3];
-	// int			y_rot[3][3];
-	// int 		z_rot[3][3];
-	int 		x_r;
-	// int 		y_r;
-	// int 		z_r;
-	int 		zoom;
-}				t_view;
+	double 			x_alpha;
+	double 			y_alpha;
+	double 			z_alpha;
+	int 			zoom;
+	struct s_point	center;
+}					t_view;
 
 typedef struct 	s_mlx
 {
@@ -80,7 +78,7 @@ t_map			*read_map(char *path);
 /*
 **	key_handler.c
 */
-void			key_hook(t_fdf *fdf);
+void			key_hook(t_fdf fdf);
 
 /*
 **	drawing.c
@@ -96,9 +94,7 @@ void			draw_line(t_point src, t_point dst, t_mlx *mlx);
 /*
 **	rotation_matrix.c
 */
-void 			x_rotation(int alpha, float x_rot[3][3]);
-// void			y_rotation(int alpha, int y_rot[3][3]);
-// void			z_rotation(int alpha, int z_rot[3][3]);
+void			x_rotation(double alpha, int *x, int *y, int *z);
 void 			apply_rotation(t_view *v, int *x, int *y, int *z);
 
 # endif

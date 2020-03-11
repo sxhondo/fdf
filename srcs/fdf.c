@@ -14,20 +14,19 @@
 
 int				main(int ac, char **av)
 {
-	t_fdf		*f;	
+	t_fdf		f;	
 
 	if (ac == 2)
 	{
-		if (!(f = ft_memalloc(sizeof(t_fdf))))
-			return (0);
-		f->map = read_map(av[1]);
-		f->mlx = init_mlx();
-		f->view = init_view(f->map);
+		f.map = read_map(av[1]);
+		f.mlx = init_mlx();
+		f.view = init_view(f.map);
+
 		key_hook(f);
-		drawing(f->map, f->view, f->mlx);
-		
-		ft_vec_del(&f->map->vec);
-		free(f->map);
+		drawing(f.map, f.view, f.mlx);
+
+		mlx_loop(f.mlx->mlx);
+		ft_vec_del(&f.map->vec);
 	}
   	return (0);
 }

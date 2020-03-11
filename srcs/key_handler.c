@@ -24,23 +24,25 @@ static int 		key_handler(int keycode, void *param)
 	t_fdf		*f;
 	
 	f = param;
-	ft_printf("[%d]\n", keycode);
+	ft_printf("key: [%d]\n", keycode);
 	if (keycode == K_EXT_0 || keycode == K_EXT_1)
 		exit(0);
 	else if (keycode == K_ZOOM_PLUS || keycode == K_ZOOM_MINUS)
 	{
 		f->view->zoom += keycode == K_ZOOM_PLUS ? 1 : -1;
+		if (f->view->zoom <= 0)
+			f->view->zoom = 1;
 		drawing(f->map, f->view, f->mlx);
 	}
 	else if (keycode == K_ROTATE_X_1 || keycode == K_ROTATE_X_2)
 	{
-		f->view->x_r += keycode == K_ROTATE_X_1 ? 1 : -1;
+		f->view->x_alpha += keycode == K_ROTATE_X_1 ? 0.1 : -0.1;
 		drawing(f->map, f->view, f->mlx);
 	}
 	return (0);
 }
 
-void			key_hook(t_fdf *fdf)
+void			key_hook(t_fdf fdf)
 {
-	mlx_hook(fdf->mlx->window, 2, 1L << 17, key_handler, fdf);
+	mlx_hook(fdf.mlx->window, 2, 1L << 17, key_handler, &fdf);
 }

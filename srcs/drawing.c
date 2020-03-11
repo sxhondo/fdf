@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fdf.h"
 
 static void		draw_background(t_mlx *mlx)
@@ -41,10 +40,10 @@ void 			isometry(int *x, int *y, int z)
 
 	*y *= -1;
 	xCart = (*x - *y) * cos(0.46365);
-	*x = xCart + X_ORIGIN;
+	*x = xCart;
 
 	yCart = *y + (*x + z) * sin(0.46365);
-	*y = -yCart + Y_ORIGIN;
+	*y = -yCart;
 }
 
 t_point 		create_point(t_view *v, t_map *map, size_t x, size_t y)
@@ -53,20 +52,18 @@ t_point 		create_point(t_view *v, t_map *map, size_t x, size_t y)
 	t_point		p;
 
 	m = map->vec->data;
-	if (v->zoom <= 0)
-		v->zoom = 1;
-	p.x = (x * v->zoom);
-	p.y = (y * v->zoom);
+	p.x = (x - (map->width / 2)) * v->zoom;
+	p.y = (y - (map->height / 2)) * v->zoom;
 	p.z = m[x + (y * map->width)] * v->zoom;
 
-	// ft_printf("XR: %d\n", v->x_r);
-
-	x_rotation(v->x_r, v->x_rot);
-	// y_rotation(v->y_r, v->y_rot);
-	// z_rotation(v->z_r, v->z_rot);
-
-	apply_rotation(v, &p.x, &p.y, &p.z);
 	isometry(&p.x, &p.y, p.z);
+	x_rotation(v->x_alpha, &p.x, &p.y, &p.z);
+
+	p.x += X_ORIGIN;
+	p.y += Y_ORIGIN;
+
+	ft_printf("zoom: %d\nX: %d Y: %d Z: %d\n", v->zoom, p.x, p.y, p.z);
+
 	return (p);
 }
 
@@ -96,7 +93,7 @@ t_point 		*project_map(t_map *map, t_view *view, t_mlx *mlx)
 
 void			drawing(t_map *map, t_view *view, t_mlx *mlx)
 {
-	size_t 		i;
+	size_t		i;
 	t_point		*proj;
 
 	i = 0;
@@ -106,11 +103,10 @@ void			drawing(t_map *map, t_view *view, t_mlx *mlx)
 	{
 		if (i + map->width < map->size)
 			draw_line(proj[i], proj[i + map->width], mlx);
-		if (i + 1 < map->size && (i + 1) % map->width)
+		if ((i + 1) < map->size && (i + 1) % map->width)
 			draw_line(proj[i], proj[i + 1], mlx);
 		i++;
 	}
 	free(proj);
 	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img, 0, 0);
-	mlx_loop(mlx->mlx);
 }

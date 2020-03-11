@@ -16,7 +16,7 @@ void			put_pixel(t_mlx *mlx, t_point p, unsigned color)
 {
 	size_t		i;
 	
-	if (p.x >= WIDTH || p.y >= HEIGHT || p.y < 0)
+	if (p.x >= WIDTH || p.y >= HEIGHT || p.y < 0 || p.x < 0)
 		return ;
 	i = (p.x * mlx->bits_per_pixel / 8) + (p.y * mlx->size_line);
 	if (mlx->endian == 0)
@@ -31,6 +31,11 @@ void			put_pixel(t_mlx *mlx, t_point p, unsigned color)
 		mlx->data_addr[++i] = (char)(color >> 8u);
 		mlx->data_addr[++i] = (char)(color);
 	}
+}
+
+void 					put_gradient(t_mlx *mlx, t_point cur, t_point dst)
+{
+	put_pixel(mlx, cur, 0x000CC5);
 }
 
 void					draw_line(t_point src, t_point dst, t_mlx *mlx)
@@ -61,12 +66,12 @@ void					draw_line(t_point src, t_point dst, t_mlx *mlx)
 				error -= delta.x * sig.x;
 				cur.y += sig.y;
 			}
-			// ft_printf("%d : %d\n", cur.x, cur.y);
-			put_pixel(mlx, cur, 0xFF00FF);
+			put_gradient(mlx, cur, dst);
+			// put_pixel(mlx, cur, 0x000CC5);
 			cur.x -= sig.x;
 		}
 	}
-	else if (sign == 1)
+	if (sign == 1)
 	{
 		while (cur.x != dst.x || cur.y != dst.y)
 		{
@@ -76,8 +81,8 @@ void					draw_line(t_point src, t_point dst, t_mlx *mlx)
 				error -= delta.y * sig.y;
 				cur.x -= sig.x;
 			}
-			// ft_printf("%d : %d\n", cur.x, cur.y);
-			put_pixel(mlx, cur, 0xFF00FF);
+			put_gradient(mlx, cur, dst);
+			// put_pixel(mlx, cur, 0x000CC5);
 			cur.y += sig.y;
 		}
 	}
