@@ -33,11 +33,6 @@ void			put_pixel(t_mlx *mlx, t_point p, unsigned color)
 	}
 }
 
-void 					put_gradient(t_mlx *mlx, t_point cur, t_point dst)
-{
-	put_pixel(mlx, cur, 0x000CC5);
-}
-
 void					draw_line(t_point src, t_point dst, t_mlx *mlx)
 {
 	t_point				cur;
@@ -56,18 +51,18 @@ void					draw_line(t_point src, t_point dst, t_mlx *mlx)
 
 	error = 0;
 	cur = src;
+	// put_pixel(mlx, cur, cur.color);
 	if (sign == -1)
 	{
 		while (cur.x != dst.x || cur.y != dst.y)
 		{
+			put_pixel(mlx, cur, get_gradient(cur, src, dst, sign));
 			error += delta.y * sig.y;
 			if (error > 0)
 			{
 				error -= delta.x * sig.x;
 				cur.y += sig.y;
 			}
-			put_gradient(mlx, cur, dst);
-			// put_pixel(mlx, cur, 0x000CC5);
 			cur.x -= sig.x;
 		}
 	}
@@ -75,14 +70,13 @@ void					draw_line(t_point src, t_point dst, t_mlx *mlx)
 	{
 		while (cur.x != dst.x || cur.y != dst.y)
 		{
+			put_pixel(mlx, cur, get_gradient(cur, src, dst, sign));
 			error += delta.x * sig.x;
 			if (error > 0)
 			{
 				error -= delta.y * sig.y;
 				cur.x -= sig.x;
 			}
-			put_gradient(mlx, cur, dst);
-			// put_pixel(mlx, cur, 0x000CC5);
 			cur.y += sig.y;
 		}
 	}

@@ -12,6 +12,20 @@
 # define X_ORIGIN 	(WIDTH / 2)
 # define Y_ORIGIN 	(HEIGHT / 2)
 
+# define C_DEFAULT	1u
+# define C_RETRO 	2u
+# define C_PASTEL	3u
+
+# define DEF_TOP_COL	0x3A44B0
+# define DEF_BOT_COL	0xE01990
+# define RET_TOP_COL	0x1FD0E2
+# define RET_BOT_COL	0xFF00FF
+# define PAS_TOP_COL	0x976EFF
+# define PAS_BOT_COL	0xADFFB8
+
+# define M_DEFAULT	1u
+# define M_ISO		2u
+
 # define ERR_MEM	"allocation failures"
 # define ERR_READ	"error while opening file"
 
@@ -27,7 +41,8 @@ typedef struct 	s_point
 {
 	int			x;
 	int			y;
-	size_t 		z;
+	int 		z;
+	unsigned	color;
 }				t_point;
 
 typedef struct		s_view
@@ -36,7 +51,9 @@ typedef struct		s_view
 	double 			y_alpha;
 	double 			z_alpha;
 	int 			zoom;
-	struct s_point	center;
+	unsigned 		mode;
+	unsigned		color;
+	struct s_point	move;
 }					t_view;
 
 typedef struct 	s_mlx
@@ -94,7 +111,11 @@ void			draw_line(t_point src, t_point dst, t_mlx *mlx);
 /*
 **	rotation_matrix.c
 */
-void			x_rotation(double alpha, int *x, int *y, int *z);
-void 			apply_rotation(t_view *v, int *x, int *y, int *z);
+void 			rotation(t_view *v, int *x, int *y, int *z);
+
+/*
+**	color.c
+*/
+int				get_gradient(t_point cur, t_point src, t_point dst, int sign);
 
 # endif

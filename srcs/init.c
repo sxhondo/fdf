@@ -18,12 +18,14 @@ t_view			*init_view(t_map *map)
 
 	if (!(v = ft_memalloc(sizeof(t_view))))
 		display_error("ERR_MEM");
-	v->zoom = (WIDTH / map->width / 4);
-	v->center.x = (WIDTH / 2);
-	v->center.y = (HEIGHT / 2);
+	v->zoom = (WIDTH / map->width / 2);
 	v->x_alpha = 0.0;
 	v->y_alpha = 0.0;
 	v->z_alpha = 0.0;
+	v->mode = M_DEFAULT;
+	v->color = C_DEFAULT;
+	v->move.x = 0;
+	v->move.y = 0;
 	return (v);
 }
 

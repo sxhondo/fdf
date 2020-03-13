@@ -37,6 +37,7 @@ set(SOURCES
 	${SRC_DIR}draw_line.c
 	${SRC_DIR}key_handler.c
 	${SRC_DIR}rotation_matrix.c
+	${SRC_DIR}color.c
 )
 
 add_executable(${DST} 

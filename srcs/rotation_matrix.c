@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static void			mult_xyz(double rmatrix[3][3], int *x, int *y, int *z)
+static void			mult_xyz(const double rmatrix[3][3], int *x, int *y, int *z)
 {
 	const int 		xyz[3] = {*x, *y, *z};
 	int 			res[3];
@@ -35,7 +35,7 @@ static void			mult_xyz(double rmatrix[3][3], int *x, int *y, int *z)
 }
 
  
- void				x_rotation(double alpha, int *x, int *y, int *z)
+ static void		x_rotation(double alpha, int *x, int *y, int *z)
 {
 	const double 	cosA = cos(alpha);
 	const double	sinA = sin(alpha);
@@ -44,5 +44,36 @@ static void			mult_xyz(double rmatrix[3][3], int *x, int *y, int *z)
 		{0.0, cosA, -sinA},
 		{0.0, sinA, cosA}
 	};
-	mult_xyz(&matrix, x, y, z);
+	mult_xyz(matrix, x, y, z);
+}
+
+static void			y_rotation(double alpha, int *x, int *y, int *z)
+{
+	const double 	cosA = cos(alpha);
+	const double	sinA = sin(alpha);
+	const double 	matrix[3][3] = {
+		{cosA, 0.0, sinA},
+		{0.0, 1.0, 0.0},
+		{-sinA, 0.0, cosA}
+	};
+	mult_xyz(matrix, x, y, z);
+}
+
+static void			z_rotation(double alpha, int *x, int *y, int *z)
+{
+	const double 	cosA = cos(alpha);
+	const double	sinA = sin(alpha);
+	const double 	matrix[3][3] = {
+		{cosA, -sinA, 0},
+		{sinA, cosA, 0.0},
+		{0.0, 0.0, 1.0}
+	};
+	mult_xyz(matrix, x, y, z);
+}
+
+void 				rotation(t_view *v, int *x, int *y, int *z)
+{
+	x_rotation(v->x_alpha, x, y, z);
+	y_rotation(v->y_alpha, x, y, z);
+	z_rotation(v->z_alpha, x, y, z);
 }
