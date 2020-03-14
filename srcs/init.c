@@ -37,7 +37,7 @@ t_mlx			*init_mlx()
 		display_error(ERR_MEM);
 	if (!(p->mlx = mlx_init()))
 		display_error(ERR_MEM);
-	if (!(p->window = mlx_new_window(p->mlx, WIDTH, HEIGHT, "FdF")))
+	if (!(p->window = mlx_new_window(p->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF")))
 		display_error(ERR_MEM);
 	if (!(p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT)))
 		display_error(ERR_MEM);

@@ -6,11 +6,14 @@
 #include "mlx.h"
 #include "math.h"
 
-# define WIDTH		800
-# define HEIGHT		600
+# define WIDTH		1024
+# define HEIGHT		768
+
+# define WIN_WIDTH	WIDTH + 200
+# define WIN_HEIGHT	HEIGHT
 
 # define X_ORIGIN 	(WIDTH / 2)
-# define Y_ORIGIN 	(HEIGHT / 2)
+# define Y_ORIGIN 	(HEIGHT / 2 + 100)
 
 # define C_DEFAULT	1u
 # define C_RETRO 	2u
@@ -22,15 +25,19 @@
 # define RET_BOT_COL	0xFF00FF
 # define PAS_TOP_COL	0x976EFF
 # define PAS_BOT_COL	0xADFFB8
+# define C_MENU			0xAFAFAF
+
 
 # define M_DEFAULT	1u
 # define M_ISO		2u
 
 # define ERR_MEM	"allocation failures"
 # define ERR_READ	"error while opening file"
+# define ERR_MAP	"invalid map"
 
 typedef struct	s_map
 {
+	t_vec 		*colors;
 	t_vec 		*vec;
 	size_t 		height;
 	size_t		width;
@@ -56,7 +63,7 @@ typedef struct		s_view
 	struct s_point	move;
 }					t_view;
 
-typedef struct 	s_mlx
+typedef struct 		s_mlx
 {
 	void 			*mlx;
 	void 			*window;

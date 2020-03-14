@@ -26,7 +26,7 @@ static void		draw_background(t_mlx *mlx)
 		{
 			tmp.x = xi;
 			tmp.y = yi;
-			put_pixel(mlx, tmp, 0x232323);
+			put_pixel(mlx, tmp, 0x121212);
 			xi++;
 		}
 		yi++;
