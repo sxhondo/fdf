@@ -28,19 +28,35 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/)
 
-set(SOURCES
+
+if (${CMAKE_SYSTEM} MATCHES "Linux")
+	set(SOURCES
 	${SRC_DIR}fdf.c
 	${SRC_DIR}utilities.c
 	${SRC_DIR}init.c
 	${SRC_DIR}read_file.c
 	${SRC_DIR}drawing.c
 	${SRC_DIR}draw_line.c
-	${SRC_DIR}key_handler.c
+	${SRC_DIR}key_handler_linux.c
 	${SRC_DIR}rotation_matrix.c
-	${SRC_DIR}color.c
-)
+	${SRC_DIR}color.c)
 
-add_executable(${DST} 
+
+elseif (${CMAKE_SYSTEM} MATCHES "Darwin")
+	set(SOURCES
+	${SRC_DIR}fdf.c
+	${SRC_DIR}utilities.c
+	${SRC_DIR}init.c
+	${SRC_DIR}read_file.c
+	${SRC_DIR}drawing.c
+	${SRC_DIR}draw_line.c
+	${SRC_DIR}key_handler_mac_os.c
+	${SRC_DIR}rotation_matrix.c
+	${SRC_DIR}color.c)
+
+endif ()
+
+add_executable(${DST}
 	${SOURCES})
 
 target_include_directories(${DST} PUBLIC ${INC_DIR})
@@ -58,14 +74,21 @@ add_subdirectory(${LIB_DIR})
 target_include_directories(${DST} PUBLIC ${LIB_DIR}incs/)
 target_link_directories(${DST} PUBLIC ${LIB_DIR})
 
-target_link_libraries(${DST}
+if (${CMAKE_SYSTEM} MATCHES "Linux")
+	target_link_libraries(${DST}
+	"mlx"
+	"libft"
+	"Xext"
+	"X11")
+
+elseif (${CMAKE_SYSTEM} MATCHES "Darwin")
+	target_link_libraries(${DST}
 	"mlx"
 	"libft"
 	"-framework OpenGL"
-	"-framework AppKit"
-)
+	"-framework AppKit")
 
-add_dependencies(${DST} libmlx libft)
+endif ()
 
 add_executable(debug ${SOURCES})
 target_include_directories(debug PUBLIC ${INC_DIR})
@@ -74,12 +97,21 @@ target_link_directories(debug PUBLIC ${LIB_DIR})
 
 add_dependencies(${DST} libmlx libft)
 
-target_link_libraries(debug
+if (${CMAKE_SYSTEM} MATCHES "Linux")
+	target_link_libraries(debug
+	"mlx"
+	"libft"
+	"Xext"
+	"X11")
+
+elseif (${CMAKE_SYSTEM} MATCHES "Darwin")
+	target_link_libraries(debug
 	"mlx"
 	"libft"
 	"-framework OpenGL"
-	"-framework AppKit"
-)
+	"-framework AppKit")
+
+endif ()
 
 set_target_properties(debug PROPERTIES
 		COMPILE_FLAGS ${DEBUG_FLAGS}
