@@ -39,7 +39,9 @@ if (${CMAKE_SYSTEM} MATCHES "Linux")
 	${SRC_DIR}draw_line.c
 	${SRC_DIR}key_handler_linux.c
 	${SRC_DIR}rotation_matrix.c
-	${SRC_DIR}color.c)
+	${SRC_DIR}color.c
+	${SRC_DIR}draw_window.c
+	${SRC_DIR}projection.c)
 
 
 elseif (${CMAKE_SYSTEM} MATCHES "Darwin")
@@ -52,7 +54,9 @@ elseif (${CMAKE_SYSTEM} MATCHES "Darwin")
 	${SRC_DIR}draw_line.c
 	${SRC_DIR}key_handler_mac_os.c
 	${SRC_DIR}rotation_matrix.c
-	${SRC_DIR}color.c)
+	${SRC_DIR}color.c
+	${SRC_DIR}draw_window.c
+	${SRC_DIR}projection.c)
 
 endif ()
 
@@ -73,6 +77,9 @@ target_link_directories(${DST} PUBLIC ${MLX_DIR})
 add_subdirectory(${LIB_DIR})
 target_include_directories(${DST} PUBLIC ${LIB_DIR}incs/)
 target_link_directories(${DST} PUBLIC ${LIB_DIR})
+
+set_target_properties(${DST} PROPERTIES
+		COMPILE_FLAGS ${BUILD_FLAGS})
 
 if (${CMAKE_SYSTEM} MATCHES "Linux")
 	target_link_libraries(${DST}

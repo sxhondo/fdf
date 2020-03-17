@@ -12,10 +12,10 @@
 
 #include "fdf.h"
 
-void			put_pixel(t_mlx *mlx, t_point p, unsigned color)
+void					put_pixel(t_mlx *mlx, t_point p, unsigned color)
 {
-	size_t		i;
-	
+	size_t				i;
+
 	if (p.x >= WIDTH || p.y >= HEIGHT || p.y < 0 || p.x < 0)
 		return ;
 	i = (p.x * mlx->bits_per_pixel / 8) + (p.y * mlx->size_line);
@@ -33,51 +33,64 @@ void			put_pixel(t_mlx *mlx, t_point p, unsigned color)
 	}
 }
 
-void					draw_line(t_point src, t_point dst, t_mlx *mlx)
+static void				up_angle(t_mlx *mlx, t_point src, t_point dst,
+															t_point delta)
 {
+	t_point				sig;
 	t_point				cur;
-	t_point 			delta;
-	t_point 			sig;
-	int 				error;
-	int 				sign;
-
-	delta.y = dst.y - src.y;
-	delta.x = src.x - dst.x;
-
-	sign = ft_abs(delta.y) > ft_abs(delta.x) ? 1 : -1;
-
-	sig.y = delta.y < 0 ? -1 : 1;
-	sig.x = delta.x < 0 ? -1 : 1;
+	int					error;
 
 	error = 0;
 	cur = src;
-	// put_pixel(mlx, cur, cur.color);
-	if (sign == -1)
+	sig.y = delta.y < 0 ? -1 : 1;
+	sig.x = delta.x < 0 ? -1 : 1;
+	while (cur.x != dst.x || cur.y != dst.y)
 	{
-		while (cur.x != dst.x || cur.y != dst.y)
+		put_pixel(mlx, cur, get_gradient(cur, src, dst, -1));
+		error += delta.y * sig.y;
+		if (error > 0)
 		{
-			put_pixel(mlx, cur, get_gradient(cur, src, dst, sign));
-			error += delta.y * sig.y;
-			if (error > 0)
-			{
-				error -= delta.x * sig.x;
-				cur.y += sig.y;
-			}
-			cur.x -= sig.x;
-		}
-	}
-	if (sign == 1)
-	{
-		while (cur.x != dst.x || cur.y != dst.y)
-		{
-			put_pixel(mlx, cur, get_gradient(cur, src, dst, sign));
-			error += delta.x * sig.x;
-			if (error > 0)
-			{
-				error -= delta.y * sig.y;
-				cur.x -= sig.x;
-			}
+			error -= delta.x * sig.x;
 			cur.y += sig.y;
 		}
+		cur.x -= sig.x;
 	}
+}
+
+static void				down_angle(t_mlx *mlx, t_point src, t_point dst,
+																t_point delta)
+{
+	t_point				sig;
+	t_point				cur;
+	int					error;
+
+	error = 0;
+	cur = src;
+	sig.y = delta.y < 0 ? -1 : 1;
+	sig.x = delta.x < 0 ? -1 : 1;
+	while (cur.x != dst.x || cur.y != dst.y)
+	{
+		put_pixel(mlx, cur, get_gradient(cur, src, dst, 1));
+		error += delta.x * sig.x;
+		if (error > 0)
+		{
+			error -= delta.y * sig.y;
+			cur.x -= sig.x;
+		}
+		cur.y += sig.y;
+	}
+}
+
+void					draw_line(t_point src, t_point dst, t_mlx *mlx)
+{
+	t_point				delta;
+	int					sign;
+
+	delta.y = dst.y - src.y;
+	delta.x = src.x - dst.x;
+	sign = ft_abs(delta.y) > ft_abs(delta.x) ? 1 : -1;
+	if (sign == -1)
+		up_angle(mlx, src, dst, delta);
+	if (sign == 1)
+		down_angle(mlx, src, dst, delta);
 }

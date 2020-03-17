@@ -29,7 +29,7 @@ t_view			*init_view(t_map *map)
 	return (v);
 }
 
-t_mlx			*init_mlx()
+t_mlx			*init_mlx(void)
 {
 	t_mlx		*p;
 
@@ -47,7 +47,7 @@ t_mlx			*init_mlx()
 	return (p);
 }
 
-t_map			*init_map()
+t_map			*init_map(void)
 {
 	t_map		*m;
 

@@ -12,7 +12,7 @@
 		{
 			"label": "make debug && run",
 			"type": "shell",
-			"command": "make debug && ./debug maps/42.fdf",
+			"command": "make debug && ./debug maps/pyramide.fdf",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",
