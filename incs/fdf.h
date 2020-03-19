@@ -17,6 +17,7 @@
 # include "ft_printf.h"
 # include "mlx.h"
 # include "math.h"
+# include <stdio.h>
 
 # define WIDTH			1024
 # define HEIGHT			768

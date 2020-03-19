@@ -6,7 +6,7 @@
 /*   By: sxhondo <w13cho@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:51:23 by sxhondo           #+#    #+#             */
-/*   Updated: 2020/03/16 17:51:24 by sxhondo          ###   ########.fr       */
+/*   Updated: 2020/03/19 20:08:15 by sxhondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@
 /*
 ** Linux (under construction)
 */
+# define LIN_X              120
+# define LIN_ESC            65307
 
 #endif

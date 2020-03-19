@@ -15,13 +15,10 @@
 static void			mult_xyz(const double rmatrix[3][3], int *x, int *y, int *z)
 {
 	const int		xyz[3] = {*x, *y, *z};
-	int				res[3];
+	int				res[3] = {0};
 	int				i;
 
 	i = 0;
-	res[0] = 0;
-	res[1] = 0;
-	res[2] = 0;
 	while (i < 3)
 	{
 		res[0] += (rmatrix[i][0] * xyz[i]);
@@ -43,7 +40,6 @@ static void			x_rotation(double alpha, int *x, int *y, int *z)
 		{0.0, cosa, -sina},
 		{0.0, sina, cosa}
 	};
-
 	mult_xyz(matrix, x, y, z);
 }
 
@@ -56,7 +52,6 @@ static void			y_rotation(double alpha, int *x, int *y, int *z)
 		{0.0, 1.0, 0.0},
 		{-sina, 0.0, cosa}
 	};
-
 	mult_xyz(matrix, x, y, z);
 }
 
@@ -69,7 +64,6 @@ static void			z_rotation(double alpha, int *x, int *y, int *z)
 		{sina, cosa, 0.0},
 		{0.0, 0.0, 1.0}
 	};
-
 	mult_xyz(matrix, x, y, z);
 }
 
