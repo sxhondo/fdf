@@ -60,11 +60,8 @@ static void		rot_projection_handler(int keycode, t_view *view)
 	}
 }
 
-static int		key_handler(int keycode, void *param)
+static int		key_handler(int keycode, t_fdf *f)
 {
-	t_fdf		*f;
-
-	f = param;
 	if (keycode == MO_ESC || keycode == MO_X)
 		exit_free(f->mlx, f->view, f->map);
 	else if (keycode == MO_S || keycode == MO_W
@@ -82,7 +79,7 @@ static int		key_handler(int keycode, void *param)
 	return (0);
 }
 
-void			key_hook(t_fdf fdf)
+void			key_hook(t_fdf *fdf)
 {
-	mlx_hook(fdf.mlx->window, 2, 0, key_handler, &fdf);
+	mlx_hook(fdf.mlx->window, 2, 0, key_handler, fdf);
 }

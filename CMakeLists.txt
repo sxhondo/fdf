@@ -63,10 +63,11 @@ add_custom_target(
 	COMMAND make
 	WORKING_DIRECTORY ${MLX_DIR})
 
-add_executable(${DST} ${SOURCES})
-target_include_directories(${DST} PUBLIC 
+add_executable(${DST}
+	${SOURCES})
+target_include_directories(${DST} PUBLIC
 		${INC_DIR}
-		${LIB_DIR}incs/ 
+		${LIB_DIR}incs/
 		${MLX_DIR})
 target_link_directories(${DST} PUBLIC ${MLX_DIR} ${LIB_DIR})
 target_link_libraries(${DST} ${LIBS})

@@ -34,7 +34,7 @@ static void		draw_menu_options(t_mlx *mlx, t_view *view)
 static void		draw_menu(t_mlx *mlx, t_view *view)
 {
 	mlx_string_put(mlx->mlx, mlx->window,
-		WIN_WIDTH - 145, 0, C_MENU, "controls:");
+		WIN_WIDTH - 145, 15, C_MENU, "controls:");
 	mlx_string_put(mlx->mlx, mlx->window,
 		WIN_WIDTH - 185, 35, C_MENU, "W - S  x rotation");
 	mlx_string_put(mlx->mlx, mlx->window,
