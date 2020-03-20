@@ -6,7 +6,7 @@
 /*   By: sxhondo <w13cho@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 19:13:25 by sxhondo           #+#    #+#             */
-/*   Updated: 2020/03/10 19:23:51 by sxhondo          ###   ########.fr       */
+/*   Updated: 2020/03/20 14:09:38 by sxhondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				main(int ac, char **av)
 		f.map = read_map(av[1]);
 		f.mlx = init_mlx();
 		f.view = init_view(f.map);
-		key_hook(f);
+		key_hook(&f);
 		drawing(f.map, f.view, f.mlx);
 		mlx_loop(f.mlx->mlx);
 		ft_vec_del(&f.map->vec);

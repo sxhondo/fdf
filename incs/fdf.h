@@ -6,7 +6,7 @@
 /*   By: sxhondo <w13cho@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 19:42:26 by sxhondo           #+#    #+#             */
-/*   Updated: 2020/03/16 19:42:26 by sxhondo          ###   ########.fr       */
+/*   Updated: 2020/03/20 14:09:27 by sxhondo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_map					*read_map(char *path);
 /*
 **	key_handler.c
 */
-void					key_hook(t_fdf fdf);
+void					key_hook(t_fdf *fdf);
 
 /*
 **	drawing.c
