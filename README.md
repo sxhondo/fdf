@@ -18,3 +18,4 @@ Several test-maps are in the directory ./maps (sic!)
 ## Summary
 + uses Bresenham's line algorithm to connect points given in map
 + rotation is done by multiplying the rotation matrices and points
++ MacOS and Linux supported
