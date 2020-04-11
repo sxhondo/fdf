@@ -5,7 +5,7 @@ FdF requires:
 + [CMake](https://cmake.org/)
 + [Minilibx](https://github.com/sxhondo/minilibx)
 ```sh
-$ git clone --recurse-submodules https://github.com/sxhondo/libft.git && cd fdf && make
+$ git clone --recurse-submodules https://github.com/sxhondo/fdf.git && cd fdf && make
 ```
 This will create binary ./fdf in the directory
 
